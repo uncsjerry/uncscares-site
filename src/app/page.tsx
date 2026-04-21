@@ -1,4 +1,22 @@
+import Image from "next/image";
 import Link from "next/link";
+
+/* ---------- Unsplash image URLs ---------- */
+/* WHY: Using Unsplash source URLs with width params for consistent sizing.
+   All images are free-to-use under the Unsplash License. */
+const IMAGES = {
+  hero: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1920&q=80&fit=crop", // Children with backpacks heading to school — Back to School drive hero
+  backToSchool:
+    "https://images.unsplash.com/photo-1588072432837-0e9495d22363?w=600&q=80&fit=crop", // Backpack with school supplies
+  thanksgiving:
+    "https://images.unsplash.com/photo-1633611609127-ed2b72bdf27e?w=600&q=80&fit=crop", // Thanksgiving dinner table
+  bicycles:
+    "https://images.unsplash.com/photo-1518771109721-6dbe1116cfee?w=600&q=80&fit=crop", // Child riding bicycle
+  graduation:
+    "https://images.unsplash.com/photo-1686213011418-e0caa4aef2c1?w=600&q=80&fit=crop", // College graduation students
+  community:
+    "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80&fit=crop", // Volunteers hands together
+};
 
 /* ---------- Drive card data ---------- */
 const drives = [
@@ -9,6 +27,8 @@ const drives = [
     amount: "$50",
     icon: "🎒",
     season: "Summer",
+    image: IMAGES.backToSchool,
+    imageAlt: "Backpack filled with school supplies",
   },
   {
     name: "Thanksgiving Dinner Drive",
@@ -17,6 +37,8 @@ const drives = [
     amount: "$250",
     icon: "🍽️",
     season: "Fall",
+    image: IMAGES.thanksgiving,
+    imageAlt: "Family gathered around a Thanksgiving dinner table",
   },
   {
     name: "Holiday Bicycle Drive",
@@ -25,6 +47,8 @@ const drives = [
     amount: "$350",
     icon: "🚲",
     season: "Winter",
+    image: IMAGES.bicycles,
+    imageAlt: "Child happily riding a bicycle",
   },
   {
     name: "Destination Dorm",
@@ -33,6 +57,8 @@ const drives = [
     amount: "$25",
     icon: "🎓",
     season: "Spring",
+    image: IMAGES.graduation,
+    imageAlt: "College students at graduation ceremony",
   },
 ];
 
@@ -49,46 +75,50 @@ export default function Home() {
     <>
       {/* ========== HERO ========== */}
       <section className="relative bg-teal-900 overflow-hidden">
-        {/* Gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-900 via-teal-700 to-teal-900 opacity-90" />
-        {/* Subtle pattern */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
+        {/* Background photograph */}
+        <Image
+          src={IMAGES.hero}
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
         />
+        {/* WHY: Dark teal overlay at 75% opacity keeps white text readable
+            over any photograph while preserving the brand color palette. */}
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-900/80 via-teal-800/75 to-teal-900/80" />
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28 lg:py-36">
           <div className="max-w-2xl">
-            <p className="text-teal-100 text-sm font-medium uppercase tracking-widest mb-4">
-              501(c)(3) Nonprofit &middot; Broward County, FL
-            </p>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest bg-gold-500 text-white px-3 py-1.5 rounded-full mb-4">
+              Now Accepting Donations
+            </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Building Stronger{" "}
-              <span className="text-gold-400">Communities</span>
+              Back to School{" "}
+              <span className="text-gold-400">Drive 2026</span>
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-teal-100 leading-relaxed max-w-xl">
-              For over 20 years, UNCS employees and volunteers have come
-              together to support families in Broward County through hands-on
-              drives, donations, and community programs.
+              For just $50, you can send a child in Broward County back to
+              school with a brand new backpack filled with everything they need
+              to succeed. Every child deserves to start the year prepared.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Link
                 href="/donate"
                 className="donate-pulse inline-flex items-center justify-center px-8 py-3.5 bg-gold-500 text-white font-semibold rounded-lg text-lg hover:bg-gold-400 transition-colors"
               >
-                Donate to Our General Fund
+                Donate $50 — Send a Kid to School
               </Link>
               <Link
                 href="/drives"
                 className="inline-flex items-center justify-center px-8 py-3.5 border-2 border-teal-100/30 text-white font-medium rounded-lg text-lg hover:bg-white/10 transition-colors"
               >
-                View Our Drives
+                View All Drives
               </Link>
             </div>
+            <p className="mt-4 text-sm text-teal-100/70">
+              UNCS Cares Foundation &middot; 501(c)(3) Nonprofit &middot; Broward County, FL
+            </p>
           </div>
         </div>
       </section>
@@ -126,22 +156,33 @@ export default function Home() {
             {drives.map((drive) => (
               <div
                 key={drive.name}
-                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden"
               >
-                <div className="text-3xl mb-4">{drive.icon}</div>
-                <span className="inline-block text-xs font-medium uppercase tracking-wider text-teal-600 bg-teal-50 px-2 py-1 rounded-full mb-3">
-                  {drive.season}
-                </span>
-                <h3 className="text-lg font-semibold text-teal-900 mb-2">
-                  {drive.name}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                  {drive.description}
-                </p>
-                <p className="text-sm font-medium text-teal-700">
-                  Starting at{" "}
-                  <span className="text-lg font-bold">{drive.amount}</span>
-                </p>
+                {/* Drive photo */}
+                <div className="relative h-40 w-full">
+                  <Image
+                    src={drive.image}
+                    alt={drive.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
+                <div className="p-6">
+                  <span className="inline-block text-xs font-medium uppercase tracking-wider text-teal-600 bg-teal-50 px-2 py-1 rounded-full mb-3">
+                    {drive.season}
+                  </span>
+                  <h3 className="text-lg font-semibold text-teal-900 mb-2">
+                    {drive.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                    {drive.description}
+                  </p>
+                  <p className="text-sm font-medium text-teal-700">
+                    Starting at{" "}
+                    <span className="text-lg font-bold">{drive.amount}</span>
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -199,16 +240,28 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Visual placeholder — teal accent block */}
-            <div className="bg-gradient-to-br from-teal-50 to-teal-100 rounded-2xl p-8 sm:p-12 border border-teal-200/50">
-              <blockquote className="text-lg sm:text-xl text-teal-900 font-medium italic leading-relaxed">
-                &ldquo;A nonprofit is as strong as the community that holds it
-                up. Together, we can make the maximum positive effort for our
-                neighbors in Broward County.&rdquo;
-              </blockquote>
-              <p className="mt-4 text-sm text-teal-700 font-medium">
-                — Brett Rose, CEO
-              </p>
+            {/* Community photo with quote overlay */}
+            <div className="relative rounded-2xl overflow-hidden min-h-[320px]">
+              <Image
+                src={IMAGES.community}
+                alt="Volunteers joining hands in a circle, symbolizing community unity"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              {/* WHY: Semi-transparent teal overlay preserves brand feel
+                  while keeping the quote text readable over the photo. */}
+              <div className="absolute inset-0 bg-teal-900/70" />
+              <div className="relative p-8 sm:p-12 flex flex-col justify-end h-full">
+                <blockquote className="text-lg sm:text-xl text-white font-medium italic leading-relaxed">
+                  &ldquo;A nonprofit is as strong as the community that holds it
+                  up. Together, we can make the maximum positive effort for our
+                  neighbors in Broward County.&rdquo;
+                </blockquote>
+                <p className="mt-4 text-sm text-teal-100 font-medium">
+                  — Brett Rose, CEO
+                </p>
+              </div>
             </div>
           </div>
         </div>

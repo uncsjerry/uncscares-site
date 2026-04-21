@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -10,9 +11,20 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Header */}
-      <section className="bg-teal-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+      {/* Header with background photo */}
+      <section className="relative bg-teal-900 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=80&fit=crop"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        {/* WHY: Teal overlay at 80% keeps header text legible over any photo
+            while staying on-brand. */}
+        <div className="absolute inset-0 bg-teal-900/80" />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
             About UNCS Cares Foundation
           </h1>
@@ -62,6 +74,20 @@ export default function AboutPage() {
               organization (EIN #84-4044721) to expand our reach and create a
               lasting vehicle for community impact.
             </p>
+          </div>
+
+          {/* Community photo break */}
+          <div className="mb-16 relative rounded-2xl overflow-hidden h-64 sm:h-80">
+            <Image
+              src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1200&q=80&fit=crop"
+              alt="Volunteers joining hands, representing community unity and service"
+              fill
+              className="object-cover"
+              sizes="(max-width: 896px) 100vw, 896px"
+            />
+            {/* WHY: Light teal gradient overlay from bottom gives the
+                photo a branded feel without obscuring the subject. */}
+            <div className="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent" />
           </div>
 
           {/* What Makes Us Different */}
