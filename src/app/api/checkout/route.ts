@@ -1,20 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import Stripe from "stripe";
 
-/* WHY: Using Stripe Checkout Sessions instead of Payment Links because
-   we need dynamic amounts and fund metadata per donation. Checkout handles
-   all PCI compliance, card UI, Apple Pay, Google Pay automatically. */
-
-/* WHY: Lazy initialization avoids crashing the build when the env var
-   isn't set (e.g. during static page generation at build time). */
-function getStripe() {
-  if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error("STRIPE_SECRET_KEY is not configured");
-  }
-  /* WHY: Omitting apiVersion lets Stripe use the account's default version,
-     avoiding mismatches when the SDK and account are on different versions. */
-  return new Stripe(process.env.STRIPE_SECRET_KEY);
-}
+/* WHY: Using Stripe's REST API directly with fetch instead of the Stripe SDK.
+   The SDK's built-in HTTP client can have connection issues in Vercel's
+   serverless environment. Fetch is natively supported and more reliable. */
 
 /* Fund labels shown on the Stripe receipt */
 const FUND_LABELS: Record<string, string> = {
@@ -29,6 +17,14 @@ const FUND_LABELS: Record<string, string> = {
 
 export async function POST(request: NextRequest) {
   try {
+    const secretKey = process.env.STRIPE_SECRET_KEY;
+    if (!secretKey) {
+      return NextResponse.json(
+        { error: "Payment processor not configured" },
+        { status: 500 }
+      );
+    }
+
     const body = await request.json();
     const { amount, fund } = body;
 
@@ -52,45 +48,64 @@ export async function POST(request: NextRequest) {
     const fundLabel = FUND_LABELS[fund] || "General Fund";
     const origin = request.nextUrl.origin;
 
-    const stripe = getStripe();
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      /* WHY: submit_type "donate" shows "Donate" instead of "Pay" on the
-         Stripe Checkout button — important UX for nonprofits. */
-      submit_type: "donate",
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: `UNCS Cares Foundation — ${fundLabel}`,
-              description: `Tax-deductible donation to ${fundLabel}. EIN #84-4044721.`,
-            },
-            unit_amount: cents,
-          },
-          quantity: 1,
+    /* Create Stripe Checkout Session via REST API */
+    const params = new URLSearchParams();
+    params.append("mode", "payment");
+    /* WHY: submit_type "donate" shows "Donate" instead of "Pay" on the
+       Stripe Checkout button — important UX for nonprofits. */
+    params.append("submit_type", "donate");
+    params.append("line_items[0][price_data][currency]", "usd");
+    params.append(
+      "line_items[0][price_data][product_data][name]",
+      `UNCS Cares Foundation — ${fundLabel}`
+    );
+    params.append(
+      "line_items[0][price_data][product_data][description]",
+      `Tax-deductible donation to ${fundLabel}. EIN #84-4044721.`
+    );
+    params.append(
+      "line_items[0][price_data][unit_amount]",
+      cents.toString()
+    );
+    params.append("line_items[0][quantity]", "1");
+    params.append("metadata[fund]", fund);
+    params.append("metadata[fund_label]", fundLabel);
+    params.append(
+      "success_url",
+      `${origin}/donate/success?session_id={CHECKOUT_SESSION_ID}`
+    );
+    params.append("cancel_url", `${origin}/donate/cancel`);
+
+    const stripeRes = await fetch(
+      "https://api.stripe.com/v1/checkout/sessions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${secretKey}`,
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-      ],
-      metadata: {
-        fund,
-        fund_label: fundLabel,
-      },
-      success_url: `${origin}/donate/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/donate/cancel`,
-    });
+        body: params.toString(),
+      }
+    );
+
+    const session = await stripeRes.json();
+
+    if (!stripeRes.ok) {
+      console.error("Stripe API error:", session);
+      return NextResponse.json(
+        {
+          error: session.error?.message || "Payment processor error",
+        },
+        { status: stripeRes.status }
+      );
+    }
 
     return NextResponse.json({ url: session.url });
   } catch (err: unknown) {
-    const message =
-      err instanceof Error ? err.message : "Unknown error";
-    /* WHY: Include key prefix (first 12 chars) in debug output to verify
-       the env var is loaded. Test keys are not sensitive at this prefix length. */
-    const keyPrefix = process.env.STRIPE_SECRET_KEY
-      ? process.env.STRIPE_SECRET_KEY.slice(0, 12) + "..."
-      : "NOT_SET";
+    const message = err instanceof Error ? err.message : "Unknown error";
     console.error("Stripe checkout error:", message);
     return NextResponse.json(
-      { error: "Unable to create checkout session", detail: message, keyPrefix },
+      { error: "Unable to create checkout session", detail: message },
       { status: 500 }
     );
   }
