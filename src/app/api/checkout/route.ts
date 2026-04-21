@@ -83,9 +83,14 @@ export async function POST(request: NextRequest) {
   } catch (err: unknown) {
     const message =
       err instanceof Error ? err.message : "Unknown error";
+    /* WHY: Include key prefix (first 12 chars) in debug output to verify
+       the env var is loaded. Test keys are not sensitive at this prefix length. */
+    const keyPrefix = process.env.STRIPE_SECRET_KEY
+      ? process.env.STRIPE_SECRET_KEY.slice(0, 12) + "..."
+      : "NOT_SET";
     console.error("Stripe checkout error:", message);
     return NextResponse.json(
-      { error: "Unable to create checkout session", detail: message },
+      { error: "Unable to create checkout session", detail: message, keyPrefix },
       { status: 500 }
     );
   }
