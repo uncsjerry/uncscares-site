@@ -100,7 +100,7 @@ export default function Footer() {
           <p className="text-xs text-teal-100/70">
             &copy; {currentYear} UNCS Cares Foundation. All rights reserved.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
             <Link
               href="/privacy"
               className="text-xs text-teal-100/70 hover:text-white transition-colors"
@@ -112,6 +112,12 @@ export default function Footer() {
               className="text-xs text-teal-100/70 hover:text-white transition-colors"
             >
               Terms &amp; Conditions
+            </Link>
+            <Link
+              href="/refund-policy"
+              className="text-xs text-teal-100/70 hover:text-white transition-colors"
+            >
+              Refund Policy
             </Link>
           </div>
         </div>
