@@ -6,6 +6,10 @@ import { useState } from "react";
 /* WHY: These match the starting amounts of actual drives so donors see familiar numbers */
 const presetAmounts = [25, 50, 100, 250, 350, 500];
 
+/* WHY: Back to School is the active drive as of April 2026.
+   Update this when the seasonal drive changes. */
+const ACTIVE_DRIVE_DEFAULT = "backtoschool";
+
 const fundOptions = [
   { value: "general", label: "General Fund — Where It's Needed Most" },
   { value: "backtoschool", label: "Back to School Drive" },
@@ -19,22 +23,41 @@ const fundOptions = [
 export default function DonatePage() {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(50);
   const [customAmount, setCustomAmount] = useState("");
-  const [fund, setFund] = useState("general");
+  const [fund, setFund] = useState(ACTIVE_DRIVE_DEFAULT);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const donationAmount = customAmount
     ? parseInt(customAmount, 10)
     : selectedAmount;
 
-  function handleDonate() {
-    /* WHY: Stripe Payment Links are the simplest integration — no backend needed.
-       Replace this URL with your actual Stripe Payment Link once created.
-       Stripe Payment Links support custom amounts and metadata. */
-    const stripeUrl = `https://donate.stripe.com/YOUR_PAYMENT_LINK_ID`;
-    // For now, show instructions
-    alert(
-      `Stripe integration ready to connect!\n\nAmount: $${donationAmount}\nFund: ${fund}\n\nTo activate: replace the placeholder Stripe Payment Link in donate/page.tsx with your actual link from the Stripe Dashboard.`
-    );
-    // When live, uncomment: window.open(stripeUrl, '_blank');
+  async function handleDonate() {
+    if (!donationAmount || donationAmount < 1) return;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: donationAmount, fund }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      /* Redirect to Stripe's hosted checkout page */
+      window.location.href = data.url;
+    } catch {
+      setError("Unable to connect to payment processor. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -128,20 +151,29 @@ export default function DonatePage() {
               </div>
             </div>
 
+            {/* Error message */}
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                {error}
+              </div>
+            )}
+
             {/* Donate Button */}
             <button
               onClick={handleDonate}
-              disabled={!donationAmount || donationAmount < 1}
+              disabled={!donationAmount || donationAmount < 1 || loading}
               className="w-full py-4 bg-gold-500 text-white text-lg font-bold rounded-lg hover:bg-gold-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {donationAmount && donationAmount >= 1
-                ? `Donate $${donationAmount}`
-                : "Select an Amount"}
+              {loading
+                ? "Connecting to Stripe..."
+                : donationAmount && donationAmount >= 1
+                  ? `Donate $${donationAmount}`
+                  : "Select an Amount"}
             </button>
 
             <p className="mt-4 text-center text-xs text-gray-400">
               UNCS Cares Foundation is a 501(c)(3) nonprofit. EIN #84-4044721.
-              Your donation may be tax-deductible.
+              Your donation may be tax-deductible. Processed securely by Stripe.
             </p>
           </div>
 
