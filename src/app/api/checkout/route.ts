@@ -11,9 +11,9 @@ function getStripe() {
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error("STRIPE_SECRET_KEY is not configured");
   }
-  return new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: "2026-03-25.dahlia",
-  });
+  /* WHY: Omitting apiVersion lets Stripe use the account's default version,
+     avoiding mismatches when the SDK and account are on different versions. */
+  return new Stripe(process.env.STRIPE_SECRET_KEY);
 }
 
 /* Fund labels shown on the Stripe receipt */
