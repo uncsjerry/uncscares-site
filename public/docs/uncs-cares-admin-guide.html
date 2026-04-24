@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNCS Cares Foundation — Admin Quick Reference</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #0d4f5f 0%, #14617f 100%);
+      padding: 32px 40px;
+      border-radius: 10px;
+      margin-bottom: 32px;
+      color: #ffffff;
+    }
+    .header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .header .subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+    }
+    .header .gold { color: #d4a843; }
+    .header .date {
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 28px;
+      page-break-inside: avoid;
+    }
+    .section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #14617f;
+      border-bottom: 2px solid #14617f;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+    }
+    .section h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      margin: 16px 0 8px;
+    }
+    .section p, .section li {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #444;
+    }
+    .section ul, .section ol {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    .section li {
+      margin-bottom: 4px;
+    }
+
+    /* Info box */
+    .info-box {
+      background: #f0f7f9;
+      border-left: 4px solid #14617f;
+      padding: 14px 18px;
+      border-radius: 0 6px 6px 0;
+      margin: 12px 0;
+    }
+    .info-box p {
+      font-size: 13px;
+      color: #333;
+    }
+    .info-box .label {
+      font-weight: 700;
+      color: #14617f;
+    }
+
+    /* Warning box */
+    .warn-box {
+      background: #fdf9f0;
+      border-left: 4px solid #d4a843;
+      padding: 14px 18px;
+      border-radius: 0 6px 6px 0;
+      margin: 12px 0;
+    }
+    .warn-box p {
+      font-size: 13px;
+      color: #333;
+    }
+    .warn-box .label {
+      font-weight: 700;
+      color: #b8922e;
+    }
+
+    /* URL styling */
+    .url {
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 13px;
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #14617f;
+      word-break: break-all;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    th {
+      background: #14617f;
+      color: #ffffff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #eee;
+      color: #333;
+    }
+    tr:nth-child(even) td {
+      background: #f9fafb;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid #ddd;
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+    }
+
+    @media print {
+      .page { padding: 24px; max-width: none; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>UNCS Cares Foundation</h1>
+      <div class="subtitle">Admin Quick Reference — <span class="gold">Donation Monitoring &amp; Site Management</span></div>
+      <div class="date">Last updated: April 24, 2026</div>
+    </div>
+
+    <!-- Where to See Donations -->
+    <div class="section">
+      <h2>1. Where to See Donations</h2>
+
+      <h3>Supabase — Donor &amp; Donation Database (Primary)</h3>
+      <p>This is your single best view for all donation activity.</p>
+      <div class="info-box">
+        <p><span class="label">URL:</span> <span class="url">https://supabase.com/dashboard</span></p>
+        <p><span class="label">Project:</span> jbtnqubkxpgpzpvsdkfa</p>
+        <p><span class="label">Navigate to:</span> Table Editor (left sidebar)</p>
+      </div>
+
+      <table>
+        <tr>
+          <th>Table</th>
+          <th>What It Shows</th>
+        </tr>
+        <tr>
+          <td><strong>donations</strong></td>
+          <td>Every completed donation — amount, fund, donor email, date, receipt sent status, Stripe session ID</td>
+        </tr>
+        <tr>
+          <td><strong>donors</strong></td>
+          <td>Unique donor records — name, email, total donated, donation count, marketing consent</td>
+        </tr>
+      </table>
+      <p>You can filter by fund, sort by date, and export to CSV from the Table Editor.</p>
+
+      <h3>Stripe Dashboard — Payment Processing</h3>
+      <div class="info-box">
+        <p><span class="label">URL:</span> <span class="url">https://dashboard.stripe.com</span></p>
+      </div>
+      <ul>
+        <li>All payments, charges, and checkout sessions</li>
+        <li>Refunds and disputes</li>
+        <li>Webhook delivery logs (Developers &gt; Webhooks &gt; click your endpoint)</li>
+        <li>Payout schedule to your bank account</li>
+      </ul>
+
+      <h3>Resend — Email Delivery</h3>
+      <div class="info-box">
+        <p><span class="label">URL:</span> <span class="url">https://resend.com/emails</span></p>
+      </div>
+      <ul>
+        <li>All receipt emails sent</li>
+        <li>Delivery status (delivered, opened, bounced)</li>
+        <li>Contact form emails to support@uncscares.org</li>
+      </ul>
+    </div>
+
+    <!-- Site URLs -->
+    <div class="section">
+      <h2>2. Important URLs</h2>
+      <table>
+        <tr>
+          <th>What</th>
+          <th>URL</th>
+        </tr>
+        <tr>
+          <td>Live website</td>
+          <td><span class="url">https://uncscares.org</span></td>
+        </tr>
+        <tr>
+          <td>Backpack Drive page</td>
+          <td><span class="url">https://uncscares.org/backpack-drive</span></td>
+        </tr>
+        <tr>
+          <td>Donate page</td>
+          <td><span class="url">https://uncscares.org/donate</span></td>
+        </tr>
+        <tr>
+          <td>Email flyer (save as PDF)</td>
+          <td><span class="url">https://uncscares.org/flyers/backpack-drive-2026.html</span></td>
+        </tr>
+        <tr>
+          <td>Vercel dashboard</td>
+          <td><span class="url">https://vercel.com/uncs/uncscares-site</span></td>
+        </tr>
+        <tr>
+          <td>GitHub repo</td>
+          <td><span class="url">https://github.com/uncsjerry/uncscares-site</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- How It All Connects -->
+    <div class="section">
+      <h2>3. How the Donation Flow Works</h2>
+      <ol>
+        <li><strong>Donor clicks "Donate"</strong> on the website and selects an amount and fund</li>
+        <li><strong>Stripe Checkout</strong> opens — donor enters card info on Stripe's secure page</li>
+        <li><strong>Payment completes</strong> — donor sees the "Thank You" success page</li>
+        <li><strong>Stripe fires a webhook</strong> to the site automatically</li>
+        <li><strong>Webhook handler</strong> records the donation in Supabase (donors + donations tables)</li>
+        <li><strong>Receipt email</strong> is sent to the donor from <em>receipts@uncscares.org</em> via Resend</li>
+      </ol>
+      <p>All of this happens automatically. No manual steps required.</p>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="section">
+      <h2>4. Contact Form Submissions</h2>
+      <p>When someone submits the contact form at <span class="url">uncscares.org/contact</span>, an email is sent to <strong>support@uncscares.org</strong> with their name, email, subject, and message. The reply-to is set to the sender's email, so you can reply directly.</p>
+      <p>Contact form emails are also visible in the Resend dashboard.</p>
+    </div>
+
+    <!-- Before Going Live with Real Donations -->
+    <div class="section">
+      <h2>5. Before Accepting Real Donations</h2>
+      <div class="warn-box">
+        <p><span class="label">Action Required:</span> Stripe is currently in <strong>test mode</strong>. Real credit cards will not be charged. Complete these steps to go live:</p>
+      </div>
+      <ol>
+        <li><strong>Stripe Dashboard:</strong> Activate your account (complete identity verification if prompted)</li>
+        <li><strong>Stripe Dashboard:</strong> Switch to Live mode (toggle in top-right)</li>
+        <li><strong>Stripe Dashboard:</strong> Copy your <strong>live secret key</strong> (starts with <code>sk_live_</code> or <code>rk_live_</code>)</li>
+        <li><strong>Stripe Dashboard:</strong> Create a new webhook endpoint in live mode for <span class="url">https://uncscares.org/api/webhooks/stripe</span> — copy the new signing secret</li>
+        <li><strong>Vercel Dashboard:</strong> Settings &gt; Environment Variables — update:
+          <ul>
+            <li><code>STRIPE_SECRET_KEY</code> → your live key</li>
+            <li><code>STRIPE_WEBHOOK_SECRET</code> → your new live webhook signing secret</li>
+          </ul>
+        </li>
+        <li><strong>Vercel Dashboard:</strong> Redeploy the site (Deployments &gt; click latest &gt; Redeploy)</li>
+      </ol>
+    </div>
+
+    <!-- Credentials -->
+    <div class="section">
+      <h2>6. Service Accounts</h2>
+      <table>
+        <tr>
+          <th>Service</th>
+          <th>Purpose</th>
+          <th>Login</th>
+        </tr>
+        <tr>
+          <td>Vercel</td>
+          <td>Hosting &amp; deployment</td>
+          <td>uncsjerry (team: uncs)</td>
+        </tr>
+        <tr>
+          <td>Stripe</td>
+          <td>Payment processing</td>
+          <td>Check Stripe Dashboard login</td>
+        </tr>
+        <tr>
+          <td>Supabase</td>
+          <td>Donor/donation database</td>
+          <td>Check Supabase Dashboard login</td>
+        </tr>
+        <tr>
+          <td>Resend</td>
+          <td>Transactional emails</td>
+          <td>Check Resend Dashboard login</td>
+        </tr>
+        <tr>
+          <td>GoDaddy</td>
+          <td>Domain registration &amp; DNS</td>
+          <td>Check GoDaddy account</td>
+        </tr>
+        <tr>
+          <td>GitHub</td>
+          <td>Source code</td>
+          <td>uncsjerry</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Quick Troubleshooting -->
+    <div class="section">
+      <h2>7. Quick Troubleshooting</h2>
+      <table>
+        <tr>
+          <th>Problem</th>
+          <th>Where to Look</th>
+        </tr>
+        <tr>
+          <td>Donation not recorded in Supabase</td>
+          <td>Stripe Dashboard &gt; Developers &gt; Webhooks &gt; check delivery logs</td>
+        </tr>
+        <tr>
+          <td>Receipt email not sent</td>
+          <td>Supabase <code>donations</code> table — check <code>receipt_sent</code> column. Also check Resend dashboard.</td>
+        </tr>
+        <tr>
+          <td>Site not updating after code push</td>
+          <td>Vercel Dashboard &gt; Deployments — confirm latest deploy succeeded</td>
+        </tr>
+        <tr>
+          <td>Contact form not working</td>
+          <td>Check Resend dashboard for delivery errors. Verify RESEND_API_KEY in Vercel env vars.</td>
+        </tr>
+        <tr>
+          <td>Domain not resolving</td>
+          <td>GoDaddy DNS — A record should be 76.76.21.21, CNAME for www should be cname.vercel-dns.com</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer">
+      <p>UNCS Cares Foundation &bull; EIN #84-4044721 &bull; 1471 NE 26th St, 2nd Floor, Fort Lauderdale, FL 33305</p>
+      <p>Generated April 24, 2026</p>
+    </div>
+
+  </div>
+</body>
+</html>
