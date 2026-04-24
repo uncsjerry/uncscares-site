@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -19,14 +20,14 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo / Wordmark */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex flex-col">
-              <span className="text-xl sm:text-2xl font-bold tracking-tight text-teal-900">
-                UNCS Cares
-              </span>
-              <span className="text-[10px] sm:text-xs uppercase tracking-widest text-teal-600 -mt-1">
-                Foundation
-              </span>
-            </div>
+            <Image
+              src="/images/logo/uncs-cares-color.svg"
+              alt="UNCS Cares Foundation"
+              width={140}
+              height={105}
+              className="h-10 sm:h-12 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}

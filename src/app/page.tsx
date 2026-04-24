@@ -73,54 +73,85 @@ const stats = [
 export default function Home() {
   return (
     <>
-      {/* ========== HERO ========== */}
-      <section className="relative bg-teal-900 overflow-hidden">
-        {/* Background photograph */}
-        <Image
-          src={IMAGES.hero}
-          alt=""
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        {/* WHY: Dark teal overlay at 75% opacity keeps white text readable
-            over any photograph while preserving the brand color palette. */}
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-900/80 via-teal-800/75 to-teal-900/80" />
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28 lg:py-36">
-          <div className="max-w-2xl">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest bg-gold-500 text-white px-3 py-1.5 rounded-full mb-4">
-              Now Accepting Donations
+      {/* ========== HERO — "Breaking News" style alert ========== */}
+      <section className="bg-teal-900">
+        {/* Breaking news ticker bar */}
+        <div className="bg-red-700 text-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-2 flex items-center gap-3">
+            <span className="shrink-0 inline-block bg-white text-red-700 text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded">
+              Breaking
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Back to School{" "}
-              <span className="text-gold-400">Backpack Drive</span>
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-teal-100 leading-relaxed max-w-xl">
-              Did you know there are over{" "}
-              <strong className="text-white">5,000 students</strong> in Broward
-              County experiencing homelessness? Help us make sure every one of
-              them gets a brand new backpack filled with school supplies this
-              year.
+            <p className="text-sm sm:text-base font-medium truncate">
+              Over 5,000 students in Broward County are experiencing
+              homelessness — and school starts soon.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/backpack-drive"
-                className="donate-pulse inline-flex items-center justify-center px-8 py-3.5 bg-gold-500 text-white font-semibold rounded-lg text-lg hover:bg-gold-400 transition-colors"
-              >
-                Donate Today
-              </Link>
-              <Link
-                href="/drives"
-                className="inline-flex items-center justify-center px-8 py-3.5 border-2 border-teal-100/30 text-white font-medium rounded-lg text-lg hover:bg-white/10 transition-colors"
-              >
-                View All Drives
-              </Link>
+          </div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left: Copy */}
+            <div>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest bg-gold-500 text-white px-3 py-1.5 rounded-full mb-5">
+                Summer 2026 Campaign
+              </span>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                Every Child Deserves to Start the School Year{" "}
+                <span className="text-gold-400">Prepared</span>
+              </h1>
+              <p className="mt-5 text-lg text-teal-100 leading-relaxed">
+                Our Back to School Drive provides children without stable housing
+                a backpack filled with all the necessary school supplies they
+                need to succeed. This year, we need your help more than ever.
+              </p>
+              <p className="mt-4 text-teal-100/80 leading-relaxed">
+                UNCS employees don&apos;t just write checks — we personally pack
+                every backpack and hand them to the kids who need them. Your
+                donation goes directly to supplies, not overhead.
+              </p>
+              <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/backpack-drive"
+                  className="donate-pulse inline-flex items-center justify-center px-8 py-3.5 bg-gold-500 text-white font-semibold rounded-lg text-lg hover:bg-gold-400 transition-colors"
+                >
+                  Donate Today
+                </Link>
+                <Link
+                  href="/drives"
+                  className="inline-flex items-center justify-center px-8 py-3.5 border-2 border-teal-100/30 text-white font-medium rounded-lg text-lg hover:bg-white/10 transition-colors"
+                >
+                  View All Drives
+                </Link>
+              </div>
+              <p className="mt-5 text-sm text-teal-100/60">
+                UNCS Cares Foundation &middot; 501(c)(3) Nonprofit &middot; All
+                donations are tax-deductible
+              </p>
             </div>
-            <p className="mt-4 text-sm text-teal-100/70">
-              UNCS Cares Foundation &middot; 501(c)(3) Nonprofit &middot; Broward County, FL
-            </p>
+
+            {/* Right: Featured campaign image */}
+            <div className="relative">
+              <div className="rounded-xl overflow-hidden shadow-2xl border-4 border-white/10">
+                <Image
+                  src={IMAGES.hero}
+                  alt="UNCS Cares 2026 Back to School Backpack Drive — children holding colorful backpacks"
+                  width={800}
+                  height={500}
+                  priority
+                  className="w-full h-auto"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              {/* Floating stat badge */}
+              <div className="absolute -bottom-4 -left-4 sm:-bottom-5 sm:-left-5 bg-white rounded-lg shadow-lg px-5 py-3 border border-gray-100">
+                <p className="text-2xl sm:text-3xl font-bold text-teal-700">
+                  5,000+
+                </p>
+                <p className="text-xs text-gray-500 font-medium">
+                  Students Need Our Help
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
