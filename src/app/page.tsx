@@ -73,22 +73,9 @@ const stats = [
 export default function Home() {
   return (
     <>
-      {/* ========== HERO — "Breaking News" style alert ========== */}
+      {/* ========== HERO ========== */}
       <section className="bg-teal-900">
-        {/* Breaking news ticker bar */}
-        <div className="bg-red-700 text-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-2 flex items-center gap-3">
-            <span className="shrink-0 inline-block bg-white text-red-700 text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded">
-              Breaking
-            </span>
-            <p className="text-sm sm:text-base font-medium truncate">
-              Over 5,000 students in Broward County are experiencing
-              homelessness — and school starts soon.
-            </p>
-          </div>
-        </div>
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Copy */}
             <div>
