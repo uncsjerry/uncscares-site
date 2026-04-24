@@ -1,18 +1,44 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import type { Metadata } from "next";
-
-/* WHY: metadata export removed — cannot export metadata from a client component.
-   SEO metadata is handled via generateMetadata in a separate file or the layout. */
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // TODO: wire to email service (Resend, SendGrid, or Netlify Forms)
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      subject: (form.elements.namedItem("subject") as HTMLSelectElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const body = await res.json();
+        setError(body.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Unable to send message. Please try again or email us directly.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -47,6 +73,12 @@ export default function ContactPage() {
                   <p className="text-gray-600 mt-2">
                     We&apos;ll get back to you as soon as possible.
                   </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="mt-4 text-sm text-teal-700 hover:text-teal-900 font-medium underline"
+                  >
+                    Send another message
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -116,11 +148,19 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-colors resize-y"
                     />
                   </div>
+
+                  {error && (
+                    <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                      {error}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full sm:w-auto px-8 py-3 bg-teal-700 text-white font-semibold rounded-lg hover:bg-teal-600 transition-colors"
+                    disabled={loading}
+                    className="w-full sm:w-auto px-8 py-3 bg-teal-700 text-white font-semibold rounded-lg hover:bg-teal-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {loading ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}
@@ -177,7 +217,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map embed placeholder */}
+              {/* Google Maps embed — UNCS office at 1471 NE 26th St, Fort Lauderdale */}
               <div className="mt-8 bg-gray-100 rounded-xl overflow-hidden border border-gray-200">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581.7!2d-80.1322!3d26.1451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDA4JzQyLjQiTiA4MMKwMDcnNTYuMCJX!5e0!3m2!1sen!2sus!4v1"
