@@ -3,8 +3,19 @@
 import { useState } from "react";
 
 /* ---------- Preset donation amounts ---------- */
-/* WHY: These match the starting amounts of actual drives so donors see familiar numbers */
-const presetAmounts = [25, 50, 100, 250, 350, 500];
+/* WHY: Generic presets for most funds */
+const defaultPresets = [500, 250, 100, 50, 25];
+
+/* WHY: Brett Rose specified backpack-tier pricing for Back to School.
+   Largest first so the anchor effect nudges higher donations. */
+const backtoschoolPresets: { amount: number; label: string }[] = [
+  { amount: 8000, label: "1,000 Backpacks — $8,000" },
+  { amount: 4000, label: "500 Backpacks — $4,000" },
+  { amount: 2000, label: "250 Backpacks — $2,000" },
+  { amount: 800, label: "100 Backpacks — $800" },
+  { amount: 400, label: "50 Backpacks — $400" },
+  { amount: 250, label: "25 Backpacks — $250" },
+];
 
 /* WHY: Back to School is the active drive as of April 2026.
    Update this when the seasonal drive changes. */
@@ -21,7 +32,7 @@ const fundOptions = [
 ];
 
 export default function DonatePage() {
-  const [selectedAmount, setSelectedAmount] = useState<number | null>(50);
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(250);
   const [customAmount, setCustomAmount] = useState("");
   const [fund, setFund] = useState(ACTIVE_DRIVE_DEFAULT);
   const [marketingConsent, setMarketingConsent] = useState(false);
@@ -106,24 +117,48 @@ export default function DonatePage() {
               <p className="block text-sm font-semibold text-gray-700 mb-3">
                 Select Amount
               </p>
-              <div className="grid grid-cols-3 gap-3 mb-4">
-                {presetAmounts.map((amount) => (
-                  <button
-                    key={amount}
-                    onClick={() => {
-                      setSelectedAmount(amount);
-                      setCustomAmount("");
-                    }}
-                    className={`py-3 rounded-lg font-semibold text-lg transition-colors border-2 ${
-                      selectedAmount === amount && !customAmount
-                        ? "bg-teal-700 text-white border-teal-700"
-                        : "bg-white text-teal-700 border-teal-200 hover:border-teal-400"
-                    }`}
-                  >
-                    ${amount}
-                  </button>
-                ))}
-              </div>
+
+              {fund === "backtoschool" ? (
+                /* WHY: Backpack tiers use a stacked layout since labels
+                   are longer and need to convey the impact clearly. */
+                <div className="flex flex-col gap-2 mb-4">
+                  {backtoschoolPresets.map((tier) => (
+                    <button
+                      key={tier.amount}
+                      onClick={() => {
+                        setSelectedAmount(tier.amount);
+                        setCustomAmount("");
+                      }}
+                      className={`py-3 px-4 rounded-lg font-semibold text-sm sm:text-base transition-colors border-2 text-left ${
+                        selectedAmount === tier.amount && !customAmount
+                          ? "bg-teal-700 text-white border-teal-700"
+                          : "bg-white text-teal-700 border-teal-200 hover:border-teal-400"
+                      }`}
+                    >
+                      {tier.label}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="grid grid-cols-3 gap-3 mb-4">
+                  {defaultPresets.map((amount) => (
+                    <button
+                      key={amount}
+                      onClick={() => {
+                        setSelectedAmount(amount);
+                        setCustomAmount("");
+                      }}
+                      className={`py-3 rounded-lg font-semibold text-lg transition-colors border-2 ${
+                        selectedAmount === amount && !customAmount
+                          ? "bg-teal-700 text-white border-teal-700"
+                          : "bg-white text-teal-700 border-teal-200 hover:border-teal-400"
+                      }`}
+                    >
+                      ${amount}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               <div>
                 <label
