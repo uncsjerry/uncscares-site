@@ -9,10 +9,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Back to School Backpack Drive — UNCS Cares Foundation",
     description:
-      "For $50, a child gets a backpack filled with everything they need to succeed. 100% goes to Broward County kids.",
+      "Over 5,000 students in Broward County are experiencing homelessness. Help us ensure every one of them gets a brand new backpack this year.",
     url: "https://uncscares.org/backpack-drive",
     siteName: "UNCS Cares Foundation",
     type: "website",
+    images: ["/images/backpack-drive-2026.png"],
   },
 };
 
@@ -31,37 +32,37 @@ const impactTiers = [
 export default function BackpackDrivePage() {
   return (
     <>
-      {/* Hero */}
+      {/* Hero — uses official UNCS marketing image */}
       <section className="relative bg-teal-900 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1588072432837-0e9495d22363?w=1920&q=80&fit=crop"
-          alt="Backpacks and school supplies ready for students"
+          src="/images/backpack-drive-2026.png"
+          alt="UNCS Cares 2026 Back to School Backpack Drive — children holding colorful backpacks"
           fill
           priority
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-teal-900/75" />
+        <div className="absolute inset-0 bg-teal-900/60" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
           <p className="text-sm uppercase tracking-widest text-gold-400 font-semibold mb-4">
             Summer 2026 Campaign
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-            Send a Child Back to School
+            Over 5,000 Students in Broward County
             <br />
-            <span className="text-gold-400">Ready to Succeed</span>
+            <span className="text-gold-400">Are Experiencing Homelessness</span>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-teal-100 max-w-2xl mx-auto leading-relaxed">
-            For just <strong className="text-white">$50</strong>, you can
-            provide a child in Broward County with a brand new backpack filled
-            with all the school supplies they need.
+            Help us ensure that every student gets a brand new backpack filled
+            with school supplies this year. No child should start the school
+            year without the tools they need to succeed.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/donate"
               className="inline-flex items-center justify-center px-8 py-4 bg-gold-500 text-white text-lg font-bold rounded-lg hover:bg-gold-400 transition-colors shadow-lg"
             >
-              Donate a Backpack — $50
+              Donate Today
             </Link>
             <a
               href="#impact"
@@ -94,13 +95,14 @@ export default function BackpackDrivePage() {
               </p>
             </div>
             <div className="bg-teal-50 rounded-2xl p-8 text-center">
-              <p className="text-5xl font-bold text-teal-700">$50</p>
+              <p className="text-5xl font-bold text-teal-700">5,000+</p>
               <p className="mt-2 text-lg font-medium text-teal-900">
-                One backpack. One child. One school year.
+                Students need our help this year
               </p>
               <p className="mt-4 text-sm text-gray-500">
-                Includes backpack, notebooks, pencils, pens, folders, crayons,
-                scissors, glue, ruler, and more.
+                Every backpack includes notebooks, pencils, pens, folders,
+                crayons, scissors, glue, ruler, and more — everything a
+                student needs to walk in ready on day one.
               </p>
             </div>
           </div>
@@ -158,7 +160,7 @@ export default function BackpackDrivePage() {
             <div>
               <p className="text-lg font-bold">501(c)(3) Nonprofit</p>
               <p className="text-sm text-teal-200 mt-1">
-                EIN #84-4044721 — Your donation is tax-deductible.
+                EIN #84-4044721. Your donation is tax-deductible.
               </p>
             </div>
             <div>

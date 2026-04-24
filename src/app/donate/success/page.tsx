@@ -35,7 +35,7 @@ export default function DonationSuccess() {
           </p>
           <p className="text-sm text-gray-500 mb-8">
             UNCS Cares Foundation is a 501(c)(3) nonprofit. EIN #84-4044721.
-            Your donation may be tax-deductible.
+            Your donation is tax-deductible.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link

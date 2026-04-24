@@ -222,7 +222,7 @@ export default function DonatePage() {
 
             <p className="mt-4 text-center text-xs text-gray-400">
               UNCS Cares Foundation is a 501(c)(3) nonprofit. EIN #84-4044721.
-              Your donation may be tax-deductible. Processed securely by Stripe.
+              Your donation is tax-deductible. Processed securely by Stripe.
             </p>
           </div>
 

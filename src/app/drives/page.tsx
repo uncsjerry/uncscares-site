@@ -11,8 +11,7 @@ export const metadata: Metadata = {
 /* WHY: Unsplash URLs with width params sized for the card layout.
    All images are free-to-use under the Unsplash License. */
 const DRIVE_IMAGES = {
-  backToSchool:
-    "https://images.unsplash.com/photo-1588072432837-0e9495d22363?w=400&q=80&fit=crop",
+  backToSchool: "/images/backpack-drive-2026.png",
   shoes:
     "https://images.unsplash.com/photo-1631491540202-8bcabf87f842?w=400&q=80&fit=crop",
   graduation:

@@ -22,43 +22,38 @@
       background: #ffffff;
     }
 
-    /* Hero banner */
-    .hero {
-      background: linear-gradient(135deg, #0d4f5f 0%, #14617f 50%, #1a7a9a 100%);
-      padding: 48px 40px;
+    /* Marketing image hero */
+    .hero-image {
+      width: 100%;
+      display: block;
+    }
+
+    /* Headline bar below the image */
+    .headline-bar {
+      background: linear-gradient(135deg, #0d4f5f 0%, #14617f 100%);
+      padding: 32px 40px;
       text-align: center;
       color: #ffffff;
     }
-    .hero .org-name {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-size: 36px;
+    .headline-bar h1 {
+      font-size: 26px;
       font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 8px;
+      line-height: 1.3;
+      margin-bottom: 12px;
     }
-    .hero .gold {
+    .headline-bar .gold {
       color: #d4a843;
     }
-    .hero .subtitle {
-      font-size: 18px;
+    .headline-bar .subtitle {
+      font-size: 16px;
       color: rgba(255,255,255,0.85);
-      margin-top: 12px;
-      line-height: 1.5;
-    }
-    .hero .subtitle strong {
-      color: #ffffff;
+      line-height: 1.6;
     }
 
     /* Stats bar */
     .stats-bar {
       display: flex;
-      background: #14617f;
+      background: #0d4f5f;
     }
     .stat {
       flex: 1;
@@ -212,24 +207,31 @@
 <body>
   <div class="flyer">
 
-    <!-- Hero -->
-    <div class="hero">
-      <div class="org-name">UNCS Cares Foundation</div>
+    <!-- Hero — UNCS official marketing image -->
+    <img
+      src="/images/backpack-drive-2026.png"
+      alt="UNCS Cares 2026 Annual Back-to-School Backpack Drive — children holding colorful backpacks"
+      class="hero-image"
+    />
+
+    <!-- Headline -->
+    <div class="headline-bar">
       <h1>
-        Back to School<br />
-        <span class="gold">Backpack Drive 2026</span>
+        Over 5,000 Students in Broward County<br />
+        <span class="gold">Are Experiencing Homelessness</span>
       </h1>
       <p class="subtitle">
-        For just <strong>$50</strong>, send a child in Broward County back to school<br />
-        with a brand new backpack filled with everything they need to succeed.
+        Help us ensure that every student gets a brand new backpack filled with
+        school supplies this year. No child should start the school year without
+        the tools they need to succeed.
       </p>
     </div>
 
     <!-- Stats -->
     <div class="stats-bar">
       <div class="stat">
-        <div class="number">$50</div>
-        <div class="label">Per Backpack</div>
+        <div class="number">5,000+</div>
+        <div class="label">Students in Need</div>
       </div>
       <div class="stat">
         <div class="number">100%</div>
@@ -245,9 +247,9 @@
     <div class="body-content">
       <h2>Every Backpack Changes a School Year</h2>
       <p>
-        Thousands of children in Broward County start the school year without basic supplies.
-        For families experiencing homelessness or financial hardship, a backpack full of supplies
-        isn't just helpful — it's transformative.
+        Over five thousand students in Broward County are experiencing homelessness.
+        For these families, a backpack full of school supplies isn't just helpful
+        — it's transformative. It tells a child: you belong here, and you're ready.
       </p>
       <p>
         UNCS employees don't just write checks. We personally pack every backpack and
@@ -288,10 +290,10 @@
 
     <!-- CTA -->
     <div class="cta-section">
-      <h2>Ready to Send a Child Back to School?</h2>
-      <p>School starts soon. Help us make sure every child walks in prepared.</p>
+      <h2>Help a Student Start the Year Ready</h2>
+      <p>School starts soon. Every donation puts supplies in a child's hands.</p>
       <a href="https://uncscares-site.vercel.app/backpack-drive" class="cta-button">
-        Donate a Backpack
+        Donate Today
       </a>
       <span class="cta-link">uncscares-site.vercel.app/backpack-drive</span>
     </div>
@@ -302,7 +304,7 @@
         <span class="ein">UNCS Cares Foundation — EIN #84-4044721</span><br />
         1471 NE 26th St, 2nd Floor, Fort Lauderdale, FL 33305<br />
         (954) 524-3325 &nbsp;|&nbsp; support@uncscares.org<br />
-        Your donation is tax-deductible to the extent allowed by law.
+        All donations are tax-deductible.
       </p>
     </div>
 
