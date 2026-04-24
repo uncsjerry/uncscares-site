@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { amount, fund } = body;
+    const { amount, fund, marketingConsent } = body;
 
     /* Validate amount — minimum $1 donation */
     const cents = Math.round(Number(amount) * 100);
@@ -70,6 +70,7 @@ export async function POST(request: NextRequest) {
     params.append("line_items[0][quantity]", "1");
     params.append("metadata[fund]", fund);
     params.append("metadata[fund_label]", fundLabel);
+    params.append("metadata[marketing_consent]", marketingConsent ? "true" : "false");
     params.append(
       "success_url",
       `${origin}/donate/success?session_id={CHECKOUT_SESSION_ID}`

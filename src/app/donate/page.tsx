@@ -24,6 +24,7 @@ export default function DonatePage() {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(50);
   const [customAmount, setCustomAmount] = useState("");
   const [fund, setFund] = useState(ACTIVE_DRIVE_DEFAULT);
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -41,7 +42,7 @@ export default function DonatePage() {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: donationAmount, fund }),
+        body: JSON.stringify({ amount: donationAmount, fund, marketingConsent }),
       });
 
       const data = await res.json();
@@ -150,6 +151,19 @@ export default function DonatePage() {
                 </div>
               </div>
             </div>
+
+            {/* Marketing consent */}
+            <label className="flex items-start gap-3 mb-8 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={marketingConsent}
+                onChange={(e) => setMarketingConsent(e.target.checked)}
+                className="mt-0.5 h-5 w-5 rounded border-gray-300 text-teal-700 focus:ring-teal-500 cursor-pointer"
+              />
+              <span className="text-sm text-gray-600 group-hover:text-gray-700 leading-relaxed">
+                Keep me updated on UNCS Cares drives and impact stories
+              </span>
+            </label>
 
             {/* Error message */}
             {error && (
