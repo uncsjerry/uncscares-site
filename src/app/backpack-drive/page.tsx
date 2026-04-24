@@ -88,10 +88,6 @@ export default function BackpackDrivePage() {
                 notebooks. For families experiencing homelessness or financial
                 hardship, school supplies are an impossible expense.
               </p>
-              <p className="text-gray-600 leading-relaxed">
-                Your donation goes directly to supplies, not overhead.
-                Every dollar puts school supplies in a child&apos;s hands.
-              </p>
             </div>
             <div className="bg-teal-50 rounded-2xl p-8 text-center">
               <p className="text-5xl font-bold text-teal-700">5,000+</p>
