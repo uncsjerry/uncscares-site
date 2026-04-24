@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -9,8 +10,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="text-xl font-bold">UNCS Cares</h3>
-            <p className="text-sm text-teal-100 mt-1 mb-4">Foundation</p>
+            <Image
+              src="/images/logo/uncs-cares-white.png"
+              alt="UNCS Cares Foundation"
+              width={160}
+              height={120}
+              className="h-14 w-auto mb-4"
+            />
             <p className="text-sm text-teal-100 leading-relaxed">
               A 501(c)(3) nonprofit organization dedicated to building stronger
               communities in Broward County.

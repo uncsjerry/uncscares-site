@@ -24,12 +24,17 @@ export const metadata: Metadata = {
     "bicycle drive",
     "Fort Lauderdale charity",
   ],
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "UNCS Cares Foundation",
     description: "Building Stronger Communities in Broward County",
     url: "https://uncscares.org",
     siteName: "UNCS Cares Foundation",
     type: "website",
+    images: ["/images/logo/icon-512.png"],
   },
 };
 
