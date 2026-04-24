@@ -92,9 +92,8 @@ export default function Home() {
                 need to succeed. This year, we need your help more than ever.
               </p>
               <p className="mt-4 text-teal-100/80 leading-relaxed">
-                UNCS employees don&apos;t just write checks — we personally pack
-                every backpack and hand them to the kids who need them. Your
-                donation goes directly to supplies, not overhead.
+                Your donation goes directly to supplies, not overhead.
+                Every dollar puts school supplies in a child&apos;s hands.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Link
