@@ -91,10 +91,6 @@ export default function Home() {
                 a backpack filled with all the necessary school supplies they
                 need to succeed. This year, we need your help more than ever.
               </p>
-              <p className="mt-4 text-teal-100/80 leading-relaxed">
-                Your donation goes directly to supplies, not overhead.
-                Every dollar puts school supplies in a child&apos;s hands.
-              </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/backpack-drive"
