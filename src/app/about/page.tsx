@@ -103,7 +103,7 @@ export default function AboutPage() {
                 },
                 {
                   title: "Hands-On",
-                  text: "We don't just write checks. Our team packs backpacks, delivers meals, and assembles bicycles personally.",
+                  text: "We don't just write checks. Our team organizes drives, delivers meals, and assembles bicycles for the community.",
                 },
                 {
                   title: "Local Impact",

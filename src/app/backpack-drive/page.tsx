@@ -89,9 +89,8 @@ export default function BackpackDrivePage() {
                 hardship, school supplies are an impossible expense.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                UNCS employees don&apos;t just write checks — we personally pack
-                every backpack and hand them to the kids who need them. Your
-                donation goes directly to supplies, not overhead.
+                Your donation goes directly to supplies, not overhead.
+                Every dollar puts school supplies in a child&apos;s hands.
               </p>
             </div>
             <div className="bg-teal-50 rounded-2xl p-8 text-center">
@@ -170,9 +169,9 @@ export default function BackpackDrivePage() {
               </p>
             </div>
             <div>
-              <p className="text-lg font-bold">Hands-On Delivery</p>
+              <p className="text-lg font-bold">Employee-Driven</p>
               <p className="text-sm text-teal-200 mt-1">
-                Our team packs and personally delivers every backpack.
+                Organized and run by UNCS employees who volunteer their time.
               </p>
             </div>
           </div>
