@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNCS Cares — Back to School Backpack Drive 2026</title>
+  <style>
+    /* WHY: Inline-style email flyer designed for both browser viewing and
+       print-to-PDF. Uses system fonts for email compatibility. */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f5f3ef;
+      color: #1a1a1a;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .flyer {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #ffffff;
+    }
+
+    /* Marketing image hero */
+    .hero-image {
+      width: 100%;
+      display: block;
+    }
+
+    /* Headline bar below the image */
+    .headline-bar {
+      background: linear-gradient(135deg, #0d4f5f 0%, #14617f 100%);
+      padding: 32px 40px;
+      text-align: center;
+      color: #ffffff;
+    }
+    .headline-bar h1 {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .headline-bar .gold {
+      color: #d4a843;
+    }
+    .headline-bar .subtitle {
+      font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      display: flex;
+      background: #0d4f5f;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 20px 12px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      color: #ffffff;
+    }
+    .stat:last-child { border-right: none; }
+    .stat .number {
+      font-size: 28px;
+      font-weight: 800;
+      color: #d4a843;
+    }
+    .stat .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 4px;
+    }
+
+    /* Body content */
+    .body-content {
+      padding: 40px;
+    }
+    .body-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #14617f;
+      margin-bottom: 12px;
+    }
+    .body-content p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 16px;
+    }
+
+    /* What's inside list */
+    .supplies-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+      margin: 20px 0 28px;
+    }
+    .supply-item {
+      font-size: 14px;
+      color: #333;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* Impact tiers */
+    .tiers {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .tier {
+      background: #f0f7f9;
+      border-radius: 10px;
+      padding: 20px 12px;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+    .tier.featured {
+      border-color: #d4a843;
+      background: #fdf9f0;
+    }
+    .tier .count {
+      font-size: 28px;
+      font-weight: 800;
+      color: #14617f;
+    }
+    .tier .tier-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      margin-top: 2px;
+    }
+    .tier .price {
+      font-size: 16px;
+      font-weight: 700;
+      color: #d4a843;
+      margin-top: 8px;
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 36px 40px;
+      background: linear-gradient(135deg, #0d4f5f, #14617f);
+    }
+    .cta-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .cta-section p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 24px;
+    }
+    .cta-button {
+      display: inline-block;
+      background: #d4a843;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    .cta-link {
+      display: block;
+      margin-top: 16px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      word-break: break-all;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 24px 40px;
+      text-align: center;
+      background: #f5f3ef;
+      border-top: 1px solid #e0ddd6;
+    }
+    .footer p {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.6;
+    }
+    .footer .ein {
+      font-weight: 600;
+      color: #666;
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: white; }
+      .flyer { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="flyer">
+
+    <!-- Hero — UNCS official marketing image -->
+    <img
+      src="/images/backpack-drive-2026.png"
+      alt="UNCS Cares 2026 Annual Back-to-School Backpack Drive — children holding colorful backpacks"
+      class="hero-image"
+    />
+
+    <!-- Headline -->
+    <div class="headline-bar">
+      <h1>
+        Over 5,000 Students in Broward County<br />
+        <span class="gold">Are Experiencing Homelessness</span>
+      </h1>
+      <p class="subtitle">
+        Help us ensure that every student gets a brand new backpack filled with
+        school supplies this year. No child should start the school year without
+        the tools they need to succeed.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="number">5,000+</div>
+        <div class="label">Students in Need</div>
+      </div>
+      <div class="stat">
+        <div class="number">100%</div>
+        <div class="label">Goes to Kids</div>
+      </div>
+      <div class="stat">
+        <div class="number">501(c)(3)</div>
+        <div class="label">Tax Deductible</div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="body-content">
+      <h2>Every Backpack Changes a School Year</h2>
+      <p>
+        Over five thousand students in Broward County are experiencing homelessness.
+        For these families, a backpack full of school supplies isn't just helpful
+        — it's transformative. It tells a child: you belong here, and you're ready.
+      </p>
+      <p>
+        UNCS employees don't just write checks. We personally pack every backpack and
+        deliver them to the children who need them most.
+      </p>
+
+      <h2>What's Inside Every Backpack</h2>
+      <div class="supplies-grid">
+        <div class="supply-item">Brand new backpack</div>
+        <div class="supply-item">Spiral notebooks</div>
+        <div class="supply-item">Pencils &amp; pens</div>
+        <div class="supply-item">Folders &amp; binders</div>
+        <div class="supply-item">Crayons &amp; markers</div>
+        <div class="supply-item">Scissors &amp; glue</div>
+        <div class="supply-item">Ruler &amp; eraser</div>
+        <div class="supply-item">Pencil case</div>
+      </div>
+
+      <h2>Multiply Your Impact</h2>
+      <div class="tiers">
+        <div class="tier">
+          <div class="count">25</div>
+          <div class="tier-label">Backpacks</div>
+          <div class="price">$250</div>
+        </div>
+        <div class="tier featured">
+          <div class="count">100</div>
+          <div class="tier-label">Backpacks</div>
+          <div class="price">$800</div>
+        </div>
+        <div class="tier">
+          <div class="count">500</div>
+          <div class="tier-label">Backpacks</div>
+          <div class="price">$4,000</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2>Help a Student Start the Year Ready</h2>
+      <p>School starts soon. Every donation puts supplies in a child's hands.</p>
+      <a href="https://uncscares-site.vercel.app/backpack-drive" class="cta-button">
+        Donate Today
+      </a>
+      <span class="cta-link">uncscares-site.vercel.app/backpack-drive</span>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>
+        <span class="ein">UNCS Cares Foundation — EIN #84-4044721</span><br />
+        1471 NE 26th St, 2nd Floor, Fort Lauderdale, FL 33305<br />
+        (954) 524-3325 &nbsp;|&nbsp; support@uncscares.org<br />
+        All donations are tax-deductible.
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>

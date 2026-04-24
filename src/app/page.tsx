@@ -5,9 +5,9 @@ import Link from "next/link";
 /* WHY: Using Unsplash source URLs with width params for consistent sizing.
    All images are free-to-use under the Unsplash License. */
 const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1920&q=80&fit=crop", // Children with backpacks heading to school — Back to School drive hero
+  hero: "/images/backpack-drive-2026.png", // UNCS Cares official Back to School 2026 marketing image
   backToSchool:
-    "https://images.unsplash.com/photo-1588072432837-0e9495d22363?w=600&q=80&fit=crop", // Backpack with school supplies
+    "/images/backpack-drive-2026.png", // UNCS Cares official Back to School 2026 marketing image
   thanksgiving:
     "https://images.unsplash.com/photo-1633611609127-ed2b72bdf27e?w=600&q=80&fit=crop", // Thanksgiving dinner table
   bicycles:
@@ -95,19 +95,21 @@ export default function Home() {
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
               Back to School{" "}
-              <span className="text-gold-400">Drive 2026</span>
+              <span className="text-gold-400">Backpack Drive</span>
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-teal-100 leading-relaxed max-w-xl">
-              For just $50, you can send a child in Broward County back to
-              school with a brand new backpack filled with everything they need
-              to succeed. Every child deserves to start the year prepared.
+              Did you know there are over{" "}
+              <strong className="text-white">5,000 students</strong> in Broward
+              County experiencing homelessness? Help us make sure every one of
+              them gets a brand new backpack filled with school supplies this
+              year.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Link
-                href="/donate"
+                href="/backpack-drive"
                 className="donate-pulse inline-flex items-center justify-center px-8 py-3.5 bg-gold-500 text-white font-semibold rounded-lg text-lg hover:bg-gold-400 transition-colors"
               >
-                Donate $50 — Send a Kid to School
+                Donate Today
               </Link>
               <Link
                 href="/drives"
