@@ -5,11 +5,11 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Back to School Backpack Drive | UNCS Cares Foundation",
   description:
-    "For just $50, send a child in Broward County back to school with a brand new backpack filled with school supplies. 100% of your donation goes directly to a child in need.",
+    "For just $50, send a child back to school with a brand new backpack filled with school supplies. 100% of your donation goes directly to a child in need.",
   openGraph: {
     title: "Back to School Backpack Drive — UNCS Cares Foundation",
     description:
-      "Over 5,000 students in Broward County are experiencing homelessness. Help us ensure every one of them gets a brand new backpack this year.",
+      "Over 5,000 students are experiencing homelessness. Help us ensure every one of them gets a brand new backpack this year.",
     url: "https://uncscares.org/backpack-drive",
     siteName: "UNCS Cares Foundation",
     type: "website",
@@ -48,7 +48,7 @@ export default function BackpackDrivePage() {
             Summer 2026 Campaign
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-            Over 5,000 Students in Broward County
+            Over 5,000 Students
             <br />
             <span className="text-gold-400">Are Experiencing Homelessness</span>
           </h1>
@@ -83,7 +83,7 @@ export default function BackpackDrivePage() {
                 Every Child Deserves to Start the Year Prepared
               </h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Thousands of children in Broward County face the first day of
+                Thousands of children face the first day of
                 school without basic supplies. No backpack. No pencils. No
                 notebooks. For families experiencing homelessness or financial
                 hardship, school supplies are an impossible expense.
@@ -113,7 +113,7 @@ export default function BackpackDrivePage() {
             </h2>
             <p className="mt-3 text-gray-600 max-w-xl mx-auto">
               Whether you sponsor one backpack or a thousand, every dollar goes
-              directly to a child in Broward County.
+              directly to a child in need.
             </p>
           </div>
 
@@ -181,7 +181,7 @@ export default function BackpackDrivePage() {
             Ready to Make a Difference?
           </h2>
           <p className="mt-4 text-gray-600 max-w-xl mx-auto">
-            School starts soon. Help us make sure every child in Broward County
+            School starts soon. Help us make sure every child
             walks in prepared, confident, and ready to learn.
           </p>
           <Link
