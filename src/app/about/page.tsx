@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About Us | UNCS Cares Foundation",
   description:
-    "Learn about the UNCS Cares Foundation — our history, mission, and the employee-driven team behind 20+ years of community impact in Broward County.",
+    "Learn about the UNCS Cares Foundation — our history, mission, and the employee-driven team behind 20+ years of community impact.",
 };
 
 export default function AboutPage() {
@@ -29,7 +29,7 @@ export default function AboutPage() {
             About UNCS Cares Foundation
           </h1>
           <p className="mt-4 text-lg text-teal-100 max-w-2xl">
-            An employee-driven 501(c)(3) nonprofit serving Broward County for
+            An employee-driven 501(c)(3) nonprofit serving our community for
             over 20 years.
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
               UNCS Cares Foundation exists to make the maximum positive effort
-              for our community. We focus on serving Broward County families —
+              for our community. We focus on serving families —
               especially those experiencing homelessness — through direct,
               hands-on community programs and annual drives.
             </p>
@@ -58,7 +58,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-gray-600 leading-relaxed mb-4">
               For over two decades, the employees of UNCS have come together
-              each year to give back to Broward County. What started as a simple
+              each year to give back to our community. What started as a simple
               desire to help our neighbors has grown into a full foundation with
               seven annual drives spanning every season.
             </p>
@@ -107,7 +107,7 @@ export default function AboutPage() {
                 },
                 {
                   title: "Local Impact",
-                  text: "Every dollar stays in Broward County. We partner with organizations like the Broward Partnership for the Homeless.",
+                  text: "Every dollar stays local. We partner with organizations like the Broward Partnership for the Homeless.",
                 },
                 {
                   title: "Year-Round",
@@ -167,7 +167,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-gray-600 mb-6 max-w-lg mx-auto">
               Whether you donate, volunteer, or simply spread the word — you
-              help us build a stronger Broward County.
+              help us build a stronger community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Annual Drives | UNCS Cares Foundation",
   description:
-    "Learn about our year-round community drives supporting Broward County families — from Back to School supplies to Holiday Bicycles.",
+    "Learn about our year-round community drives supporting families in need — from Back to School supplies to Holiday Bicycles.",
 };
 
 /* WHY: Unsplash URLs with width params sized for the card layout.
@@ -76,7 +76,7 @@ const drives = [
     season: "Winter",
     amount: "$350",
     description:
-      "Our signature drive. A donation of $350 ensures a child in Broward County receives a brand new bicycle and helmet this holiday season. It's more than a gift — it's a childhood memory.",
+      "Our signature drive. A donation of $350 ensures a child receives a brand new bicycle and helmet this holiday season. It's more than a gift — it's a childhood memory.",
     impact: "New bicycles and helmets for children",
     icon: "🚲",
     image: DRIVE_IMAGES.bicycles,
@@ -126,7 +126,7 @@ export default function DrivesPage() {
           </h1>
           <p className="mt-4 text-lg text-teal-100 max-w-2xl">
             Throughout the year, UNCS employees organize and run drives that
-            directly serve Broward County families. Every drive is hands-on and
+            directly serve families in our community. Every drive is hands-on and
             community-driven.
           </p>
         </div>

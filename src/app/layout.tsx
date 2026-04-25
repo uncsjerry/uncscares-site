@@ -11,12 +11,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "UNCS Cares Foundation | Building Stronger Communities in Broward County",
+  title: "UNCS Cares Foundation | Building Stronger Communities",
   description:
-    "UNCS Cares Foundation is a 501(c)(3) nonprofit dedicated to serving Broward County families through annual drives, school supplies, meals, housing support, and community programs.",
+    "UNCS Cares Foundation is a 501(c)(3) nonprofit dedicated to serving families in need through annual drives, school supplies, meals, housing support, and community programs.",
   keywords: [
     "UNCS Cares",
-    "Broward County nonprofit",
+    "South Florida nonprofit",
     "community giving",
     "homeless support",
     "back to school drive",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "UNCS Cares Foundation",
-    description: "Building Stronger Communities in Broward County",
+    description: "Building Stronger Communities",
     url: "https://uncscares.org",
     siteName: "UNCS Cares Foundation",
     type: "website",
