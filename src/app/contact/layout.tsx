@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact Us | UNCS Cares Foundation",
   description:
-    "Get in touch with UNCS Cares Foundation. Questions about donations, volunteering, partnerships, or our community drives in Broward County.",
+    "Get in touch with UNCS Cares Foundation. Questions about donations, volunteering, partnerships, or our community drives.",
   openGraph: {
     title: "Contact Us — UNCS Cares Foundation",
     description:

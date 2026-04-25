@@ -110,7 +110,7 @@ function buildReceiptHtml(p: {
       </p>
       <p style="margin:0 0 24px;color:#333;font-size:16px;line-height:1.6;">
         Thank you for your generous donation to the <strong>${p.fundLabel}</strong>.
-        Your support makes a real difference for families in Broward County.
+        Your support makes a real difference for families in our community.
       </p>
 
       <!-- Receipt Table -->

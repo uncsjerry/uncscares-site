@@ -81,7 +81,7 @@ export default function DonatePage() {
             Make a Donation
           </h1>
           <p className="mt-4 text-lg text-teal-100 max-w-2xl">
-            Every dollar goes directly to supporting Broward County families.
+            Every dollar goes directly to supporting families in our community.
             Choose a fund or contribute to our General Fund.
           </p>
         </div>

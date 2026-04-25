@@ -43,7 +43,7 @@ const drives = [
   {
     name: "Holiday Bicycle Drive",
     description:
-      "Brand new bicycles and helmets for children in Broward County.",
+      "Brand new bicycles and helmets for children in need.",
     amount: "$350",
     icon: "🚲",
     season: "Winter",
@@ -64,7 +64,7 @@ const drives = [
 
 /* ---------- Impact stats ---------- */
 const stats = [
-  { value: "20+", label: "Years Serving Broward County" },
+  { value: "20+", label: "Years Serving Our Community" },
   { value: "7", label: "Annual Community Drives" },
   { value: "1,000+", label: "Families Supported Annually" },
   { value: "100%", label: "Employee-Driven Volunteers" },
@@ -163,7 +163,7 @@ export default function Home() {
             </h2>
             <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
               Year-round, our team organizes drives that directly support
-              Broward County families experiencing homelessness and hardship.
+              families experiencing homelessness and hardship.
             </p>
           </div>
 
@@ -271,7 +271,7 @@ export default function Home() {
                 <blockquote className="text-lg sm:text-xl text-white font-medium italic leading-relaxed">
                   &ldquo;A nonprofit is as strong as the community that holds it
                   up. Together, we can make the maximum positive effort for our
-                  neighbors in Broward County.&rdquo;
+                  neighbors.&rdquo;
                 </blockquote>
                 <p className="mt-4 text-sm text-teal-100 font-medium">
                   — Brett Rose, CEO
