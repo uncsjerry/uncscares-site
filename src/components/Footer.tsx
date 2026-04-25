@@ -19,7 +19,7 @@ export default function Footer() {
             />
             <p className="text-sm text-teal-100 leading-relaxed">
               A 501(c)(3) nonprofit organization dedicated to building stronger
-              communities in Broward County.
+              communities.
             </p>
             <p className="text-xs text-teal-100/70 mt-3">EIN #84-4044721</p>
           </div>

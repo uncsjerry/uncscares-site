@@ -30,7 +30,7 @@ export default function DonationSuccess() {
           </h1>
           <p className="text-gray-600 leading-relaxed mb-2">
             Your generous contribution makes a real difference for families in
-            Broward County. A tax receipt will be sent to the email you
+            our community. A tax receipt will be sent to the email you
             provided at checkout.
           </p>
           <p className="text-sm text-gray-500 mb-8">

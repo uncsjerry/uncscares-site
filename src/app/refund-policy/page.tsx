@@ -37,8 +37,8 @@ export default function RefundPolicyPage() {
               <p className="text-gray-600 leading-relaxed">
                 Donations to UNCS Cares Foundation are generally considered
                 final and non-refundable. When you make a donation, those funds
-                are directed toward our community programs serving Broward
-                County families.
+                are directed toward our community programs serving families in
+                need.
               </p>
             </div>
 

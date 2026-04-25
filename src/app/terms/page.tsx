@@ -37,7 +37,7 @@ export default function TermsPage() {
                 UNCS Cares Foundation is a 501(c)(3) tax-exempt nonprofit
                 organization (EIN #84-4044721) based in Fort Lauderdale,
                 Florida. We are an employee-driven charitable organization
-                dedicated to serving Broward County families through community
+                dedicated to serving families through community
                 drives and programs.
               </p>
             </div>
