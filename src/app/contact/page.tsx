@@ -18,6 +18,8 @@ export default function ContactPage() {
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       subject: (form.elements.namedItem("subject") as HTMLSelectElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      /* WHY: Honeypot field — bots auto-fill this invisible field, server rejects it */
+      website: (form.elements.namedItem("website") as HTMLInputElement).value,
     };
 
     try {
@@ -147,6 +149,12 @@ export default function ContactPage() {
                       required
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-colors resize-y"
                     />
+                  </div>
+
+                  {/* Honeypot — hidden from real users, bots auto-fill */}
+                  <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", top: "-9999px" }}>
+                    <label htmlFor="website">Website</label>
+                    <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
                   </div>
 
                   {error && (

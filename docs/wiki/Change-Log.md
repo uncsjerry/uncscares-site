@@ -4,6 +4,7 @@ Chronological record of site changes.
 
 | Date       | Change                                               | PR  | Notes |
 |------------|------------------------------------------------------|-----|-------|
+| 2026-05-22 | Security hardening: honeypot, rate limiting, headers  | —   | Honeypot on donate+contact forms, 10 req/min rate limit, CSP/HSTS/X-Frame-Options, origin validation, removed error detail leaking, fund allowlist validation |
 | 2026-04-25 | Removed geographic references site-wide (12 files)   | #9  | Kept "Broward Partnership for the Homeless" (org name) + legal jurisdiction |
 | 2026-04-25 | Removed geographic references from backpack-drive     | #8  | 6 edits on backpack-drive page |
 | 2026-04-24 | Removed donation-to-supplies line from all pages     | #7  | Copy accuracy |

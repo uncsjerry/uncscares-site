@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 /* WHY: Using Resend's REST API directly (same pattern as checkout route)
    to send contact form submissions to support@uncscares.org. */
+
+const ALLOWED_ORIGINS = [
+  "https://uncscares.org",
+  "https://www.uncscares.org",
+];
 
 const SUBJECT_LABELS: Record<string, string> = {
   general: "General Inquiry",
@@ -12,6 +18,25 @@ const SUBJECT_LABELS: Record<string, string> = {
 };
 
 export async function POST(request: NextRequest) {
+  /* --- Rate limiting --- */
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const limit = checkRateLimit(ip);
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { error: "Too many requests. Please wait a moment and try again." },
+      { status: 429, headers: { "Retry-After": String(Math.ceil(limit.retryAfterMs / 1000)) } }
+    );
+  }
+
+  /* --- Origin validation (skip in dev for localhost) --- */
+  const origin = request.headers.get("origin");
+  if (origin && !ALLOWED_ORIGINS.includes(origin) && !origin.includes("localhost")) {
+    return NextResponse.json(
+      { error: "Forbidden" },
+      { status: 403 }
+    );
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
@@ -21,7 +46,12 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { name, email, subject, message } = body;
+  const { name, email, subject, message, website } = body;
+
+  /* --- Honeypot check — bots fill this invisible field --- */
+  if (website) {
+    return NextResponse.json({ success: true });
+  }
 
   if (!name || !email || !message) {
     return NextResponse.json(
