@@ -1,6 +1,6 @@
 # UNCS Cares Foundation Website — Status
 
-**Last updated:** 2026-04-25
+**Last updated:** 2026-05-22
 
 ## Current State: LIVE
 
@@ -17,6 +17,7 @@
 
 | Date       | Change                                               | PR  |
 |------------|------------------------------------------------------|-----|
+| 2026-05-22 | Security hardening: honeypot bot protection, rate limiting, security headers, origin validation, info disclosure fix | — |
 | 2026-04-25 | Removed all geographic references site-wide          | #9  |
 | 2026-04-25 | Removed geographic references from backpack-drive    | #8  |
 | 2026-04-24 | Removed donation-to-supplies line from all pages     | #7  |
@@ -32,6 +33,15 @@
 | Supabase       | Donation tracking / data      | Active  |
 | Resend         | Tax receipt emails            | Active  |
 | Vercel         | Hosting + CI/CD               | Active  |
+
+## Security
+
+- Honeypot bot protection on donation + contact forms
+- In-memory rate limiting (10 req/min per IP) on all API endpoints
+- Security headers: CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy
+- Origin validation on checkout + contact API routes
+- Supabase RLS enabled on all tables (no public access policies — service role only)
+- Stripe webhook signature verification with 5-min replay protection
 
 ## Known Issues
 

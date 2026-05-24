@@ -42,6 +42,7 @@ src/
 │   └── Footer.tsx          # Site footer with links, EIN, tagline
 └── lib/
     ├── email.ts            # Tax receipt email template + send function (Resend)
+    ├── rate-limit.ts       # In-memory rate limiter (10 req/min per IP)
     ├── stripe-webhook.ts   # Stripe webhook signature verification + event handling
     └── supabase.ts         # Supabase client initialization
 ```
@@ -64,6 +65,19 @@ src/
 1. User fills form on `/contact`
 2. Client POSTs to `/api/contact`
 3. API route sends notification (details in endpoint)
+
+## Security
+
+| Layer | Implementation | Location |
+|-------|---------------|----------|
+| Bot protection | Honeypot field on donate + contact forms | Forms + API routes |
+| Rate limiting | In-memory, 10 req/min per IP | `src/lib/rate-limit.ts` |
+| Origin validation | Allowlist: uncscares.org, www.uncscares.org | API routes |
+| Security headers | CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy | `next.config.ts` |
+| Webhook auth | HMAC-SHA256 signature + 5-min timestamp replay protection | `src/lib/stripe-webhook.ts` |
+| Database access | RLS enabled, no public policies (service role only) | Supabase |
+| XSS prevention | HTML entity escaping on all user input in email templates | `src/app/api/contact/route.ts` |
+| Secrets | Server-side only (`process.env.*`), never `NEXT_PUBLIC_` for secrets | `.env.local` / Vercel |
 
 ## Brand
 

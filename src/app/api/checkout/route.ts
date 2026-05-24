@@ -1,8 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 /* WHY: Using Stripe's REST API directly with fetch instead of the Stripe SDK.
    The SDK's built-in HTTP client can have connection issues in Vercel's
    serverless environment. Fetch is natively supported and more reliable. */
+
+/* WHY: Allowlist of valid origins prevents cross-site abuse. Only our
+   own domain should be creating checkout sessions. */
+const ALLOWED_ORIGINS = [
+  "https://uncscares.org",
+  "https://www.uncscares.org",
+];
 
 /* Fund labels shown on the Stripe receipt */
 const FUND_LABELS: Record<string, string> = {
@@ -17,6 +25,25 @@ const FUND_LABELS: Record<string, string> = {
 
 export async function POST(request: NextRequest) {
   try {
+    /* --- Rate limiting --- */
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const limit = checkRateLimit(ip);
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: "Too many requests. Please wait a moment and try again." },
+        { status: 429, headers: { "Retry-After": String(Math.ceil(limit.retryAfterMs / 1000)) } }
+      );
+    }
+
+    /* --- Origin validation (skip in dev for localhost) --- */
+    const origin = request.headers.get("origin");
+    if (origin && !ALLOWED_ORIGINS.includes(origin) && !origin.includes("localhost")) {
+      return NextResponse.json(
+        { error: "Forbidden" },
+        { status: 403 }
+      );
+    }
+
     const secretKey = process.env.STRIPE_SECRET_KEY;
     if (!secretKey) {
       return NextResponse.json(
@@ -26,7 +53,14 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { amount, fund, marketingConsent } = body;
+    const { amount, fund, marketingConsent, website } = body;
+
+    /* --- Honeypot check — bots fill this invisible field --- */
+    if (website) {
+      /* WHY: Return 200 so bots think they succeeded. No point
+         telling them their submission was rejected. */
+      return NextResponse.json({ url: "https://uncscares.org/donate/success" });
+    }
 
     /* Validate amount — minimum $1 donation */
     const cents = Math.round(Number(amount) * 100);
@@ -45,8 +79,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    /* --- Validate fund against allowlist --- */
+    if (fund && !FUND_LABELS[fund]) {
+      return NextResponse.json(
+        { error: "Invalid fund selection" },
+        { status: 400 }
+      );
+    }
+
     const fundLabel = FUND_LABELS[fund] || "General Fund";
-    const origin = request.nextUrl.origin;
+    const reqOrigin = request.nextUrl.origin;
 
     /* Create Stripe Checkout Session via REST API */
     const params = new URLSearchParams();
@@ -73,9 +115,9 @@ export async function POST(request: NextRequest) {
     params.append("metadata[marketing_consent]", marketingConsent ? "true" : "false");
     params.append(
       "success_url",
-      `${origin}/donate/success?session_id={CHECKOUT_SESSION_ID}`
+      `${reqOrigin}/donate/success?session_id={CHECKOUT_SESSION_ID}`
     );
-    params.append("cancel_url", `${origin}/donate/cancel`);
+    params.append("cancel_url", `${reqOrigin}/donate/cancel`);
 
     const stripeRes = await fetch(
       "https://api.stripe.com/v1/checkout/sessions",
@@ -103,10 +145,11 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ url: session.url });
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Unknown error";
-    console.error("Stripe checkout error:", message);
+    /* WHY: Log full error server-side for debugging, but never expose
+       internal details to the client — prevents information disclosure. */
+    console.error("Stripe checkout error:", err instanceof Error ? err.message : err);
     return NextResponse.json(
-      { error: "Unable to create checkout session", detail: message },
+      { error: "Unable to create checkout session" },
       { status: 500 }
     );
   }

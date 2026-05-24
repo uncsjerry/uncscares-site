@@ -38,6 +38,9 @@ export default function DonatePage() {
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  /* WHY: Honeypot field — invisible to real users but bots auto-fill it.
+     Server rejects any submission where this field has a value. */
+  const [website, setWebsite] = useState("");
 
   const donationAmount = customAmount
     ? parseInt(customAmount, 10)
@@ -53,7 +56,7 @@ export default function DonatePage() {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: donationAmount, fund, marketingConsent }),
+        body: JSON.stringify({ amount: donationAmount, fund, marketingConsent, website }),
       });
 
       const data = await res.json();
@@ -185,6 +188,20 @@ export default function DonatePage() {
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Honeypot — hidden from real users, bots auto-fill */}
+            <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", top: "-9999px" }}>
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
             </div>
 
             {/* Marketing consent */}
