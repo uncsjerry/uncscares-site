@@ -39,3 +39,25 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Security additions
+!.env.example
+!.env.template
+.env.prod
+.env.save
+.env-old
+
+# Credentials & Keys
+*.key
+*.p12
+*.pfx
+*.jks
+.credentials/
+credentials.json
+service-account*.json
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+*.swo
