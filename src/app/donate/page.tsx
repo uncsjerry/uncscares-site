@@ -17,9 +17,20 @@ const backtoschoolPresets: { amount: number; label: string }[] = [
   { amount: 250, label: "25 Backpacks — $250" },
 ];
 
-/* WHY: Back to School is the active drive as of April 2026.
+/* WHY: Holiday Bicycle Drive tiers — each tier names the impact
+   so donors see exactly what their gift provides. */
+const bicyclePresets: { amount: number; label: string; tier: string }[] = [
+  { amount: 125, tier: "FRIEND", label: "One brand-new bicycle + helmet for a child" },
+  { amount: 250, tier: "SUPPORTER", label: "Two bicycles + helmets for children in need" },
+  { amount: 500, tier: "CHAMPION", label: "Four bicycles delivered directly to children in need" },
+  { amount: 1000, tier: "ADVOCATE", label: "Eight bicycles — delivered with smiles" },
+  { amount: 1250, tier: "DRIVE PARTNER", label: "Ten bicycles + helmets, personally delivered by our team" },
+  { amount: 5000, tier: "LEAD SPONSOR", label: "Sponsor an entire drive for children, one unforgettable holiday morning" },
+];
+
+/* WHY: Holiday Bicycle Drive is the active seasonal drive as of Sept 2026.
    Update this when the seasonal drive changes. */
-const ACTIVE_DRIVE_DEFAULT = "backtoschool";
+const ACTIVE_DRIVE_DEFAULT = "bicycle";
 
 const fundOptions = [
   { value: "general", label: "General Fund — Where It's Needed Most" },
@@ -32,7 +43,7 @@ const fundOptions = [
 ];
 
 export default function DonatePage() {
-  const [selectedAmount, setSelectedAmount] = useState<number | null>(250);
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(125);
   const [customAmount, setCustomAmount] = useState("");
   const [fund, setFund] = useState(ACTIVE_DRIVE_DEFAULT);
   const [marketingConsent, setMarketingConsent] = useState(false);
@@ -47,7 +58,8 @@ export default function DonatePage() {
     : selectedAmount;
 
   async function handleDonate() {
-    if (!donationAmount || donationAmount < 1) return;
+    const minAmount = fund === "bicycle" ? 10 : 1;
+    if (!donationAmount || donationAmount < minAmount) return;
 
     setLoading(true);
     setError("");
@@ -121,7 +133,44 @@ export default function DonatePage() {
                 Select Amount
               </p>
 
-              {fund === "backtoschool" ? (
+              {fund === "bicycle" ? (
+                /* WHY: Bicycle tiers use a card layout with tier name + description
+                   to make impact tangible and encourage higher giving. */
+                <div className="flex flex-col gap-3 mb-4">
+                  {bicyclePresets.map((tier) => (
+                    <button
+                      key={tier.amount}
+                      onClick={() => {
+                        setSelectedAmount(tier.amount);
+                        setCustomAmount("");
+                      }}
+                      className={`py-4 px-5 rounded-lg transition-colors border-2 text-left ${
+                        selectedAmount === tier.amount && !customAmount
+                          ? "bg-teal-700 text-white border-teal-700"
+                          : "bg-white text-teal-700 border-teal-200 hover:border-teal-400"
+                      }`}
+                    >
+                      <div className="flex items-baseline justify-between gap-2">
+                        <span className="font-bold text-lg">${tier.amount.toLocaleString()}</span>
+                        <span className={`text-xs font-semibold tracking-wide uppercase ${
+                          selectedAmount === tier.amount && !customAmount
+                            ? "text-teal-200"
+                            : "text-gold-500"
+                        }`}>
+                          {tier.tier}
+                        </span>
+                      </div>
+                      <p className={`text-sm mt-1 ${
+                        selectedAmount === tier.amount && !customAmount
+                          ? "text-teal-100"
+                          : "text-gray-500"
+                      }`}>
+                        {tier.label}
+                      </p>
+                    </button>
+                  ))}
+                </div>
+              ) : fund === "backtoschool" ? (
                 /* WHY: Backpack tiers use a stacked layout since labels
                    are longer and need to convey the impact clearly. */
                 <div className="flex flex-col gap-2 mb-4">
@@ -168,7 +217,7 @@ export default function DonatePage() {
                   htmlFor="custom-amount"
                   className="block text-sm text-gray-500 mb-1"
                 >
-                  Or enter a custom amount
+                  Or enter a custom amount{fund === "bicycle" ? " (minimum $10)" : ""}
                 </label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">
@@ -177,7 +226,7 @@ export default function DonatePage() {
                   <input
                     type="number"
                     id="custom-amount"
-                    min="1"
+                    min={fund === "bicycle" ? "10" : "1"}
                     placeholder="Other amount"
                     value={customAmount}
                     onChange={(e) => {
@@ -227,12 +276,12 @@ export default function DonatePage() {
             {/* Donate Button */}
             <button
               onClick={handleDonate}
-              disabled={!donationAmount || donationAmount < 1 || loading}
+              disabled={!donationAmount || donationAmount < (fund === "bicycle" ? 10 : 1) || loading}
               className="w-full py-4 bg-gold-500 text-white text-lg font-bold rounded-lg hover:bg-gold-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading
                 ? "Connecting to Stripe..."
-                : donationAmount && donationAmount >= 1
+                : donationAmount && donationAmount >= (fund === "bicycle" ? 10 : 1)
                   ? `Donate $${donationAmount}`
                   : "Select an Amount"}
             </button>
